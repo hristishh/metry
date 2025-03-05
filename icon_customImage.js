@@ -10,9 +10,9 @@ function init() {
 
     const MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #000000; font-weight: bold;">$[properties.iconContent]</div>');
 
-    // Задайте размеры вашего изображения
-    const sergeyImageWidth = 100; // ширина sergey.png
-    const sergeyImageHeight = 100; // высота sergey.png
+    // Р—Р°РґР°Р№С‚Рµ СЂР°Р·РјРµСЂС‹ РІР°С€РµРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
+    const sergeyImageWidth = 100; // С€РёСЂРёРЅР° sergey.png
+    const sergeyImageHeight = 100; // РІС‹СЃРѕС‚Р° sergey.png
     const placemarkCoordinates = [55.768339, 37.629125];
 
     const myPlacemark = new ymaps.Placemark(placemarkCoordinates, {
@@ -24,7 +24,7 @@ function init() {
         iconLayout: 'default#imageWithContent',
         iconImageHref: 'images.png',
         iconImageSize: [30, 50],
-        iconImageOffset: [-5, -38] // Смещение для начального изображения
+        iconImageOffset: [-5, -38] // РЎРјРµС‰РµРЅРёРµ РґР»СЏ РЅР°С‡Р°Р»СЊРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
     });
 
     myMap.geoObjects.add(myPlacemark);
@@ -32,8 +32,8 @@ function init() {
     myPlacemark.events
         .add('mouseenter', function (e) {
             e.get('target').options.set('iconLayout', 'default#imageWithContent');
-            e.get('target').options.set('iconImageSize', [200, 120]); // Установите размеры для sergey.png
-            e.get('target').options.set('iconImageOffset', [-sergeyImageWidth, -sergeyImageHeight]); // Смещение для фиксации левого нижнего угла
+            e.get('target').options.set('iconImageSize', [200, 120]); // РЈСЃС‚Р°РЅРѕРІРёС‚Рµ СЂР°Р·РјРµСЂС‹ РґР»СЏ sergey.png
+            e.get('target').options.set('iconImageOffset', [-sergeyImageWidth, -sergeyImageHeight]); // РЎРјРµС‰РµРЅРёРµ РґР»СЏ С„РёРєСЃР°С†РёРё Р»РµРІРѕРіРѕ РЅРёР¶РЅРµРіРѕ СѓРіР»Р°
             e.get('target').options.set('iconContentOffset', [20, 15]);
             e.get('target').options.set('iconImageHref', 'sergey.png');
         })
@@ -42,9 +42,13 @@ function init() {
             e.get('target').options.set('iconImageSize', [30, 50]);
             e.get('target').options.set('iconImageOffset', [-5, -38]);
             e.get('target').options.set('iconImageHref', 'images.png');
+        })
+        .add('click', function (e) {
+            // РћС‚РєСЂС‹РІР°РµРј Р±Р°Р»СѓРЅ СЃ РёР·РѕР±СЂР°Р¶РµРЅРёРµРј sergey.png
+            e.get('target').balloon.open(placemarkCoordinates, {
+                contentBody: '<img src="sergey.png" width="' + sergeyImageWidth + '" height="' + sergeyImageHeight + '" alt="Sergey Image"/>',
+                // Р’С‹ РјРѕР¶РµС‚Рµ РґРѕР±Р°РІРёС‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ РЅР°СЃС‚СЂРѕР№РєРё Р±Р°Р»СѓРЅР°
+                closeButton: true // РљРЅРѕРїРєР° Р·Р°РєСЂС‹С‚РёСЏ Р±Р°Р»СѓРЅР°
+            });
         });
 }
-
-
-
-
