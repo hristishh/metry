@@ -10,9 +10,9 @@ function init() {
 
     const MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #000000; font-weight: bold;">$[properties.iconContent]</div>');
 
-    // Задайте размеры ваших изображений
+    // Г‡Г Г¤Г Г©ГІГҐ Г°Г Г§Г¬ГҐГ°Г» ГўГ ГёГЁГµ ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГ©
     const images = {
-        images: { src: 'images.png', width: 100, height: 100 }, // Общее изображение для всех меток
+        images: { src: 'images.png', width: 100, height: 100 }, // ГЋГЎГ№ГҐГҐ ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГҐ Г¤Г«Гї ГўГ±ГҐГµ Г¬ГҐГІГ®ГЄ
         sergey: { src: 'sergey.png', width: 100, height: 100 },
         degt: { src: 'degt.png', width: 100, height: 100 },
         passion: { src: 'passion.png', width: 100, height: 100 },
@@ -20,7 +20,7 @@ function init() {
         prech: { src: 'prech.png', width: 100, height: 100 }
     };
 
-    // Координаты для каждого объекта
+    // ГЉГ®Г®Г°Г¤ГЁГ­Г ГІГ» Г¤Г«Гї ГЄГ Г¦Г¤Г®ГЈГ® Г®ГЎГєГҐГЄГІГ 
     const placemarksData = [
         { coordinates: [55.768339, 37.629125], imageKey: 'sergey' },
         { coordinates: [55.768532, 37.604978], imageKey: 'degt' },
@@ -39,7 +39,7 @@ function init() {
             iconLayout: 'default#imageWithContent',
             iconImageHref: 'images.png',
             iconImageSize: [30, 50],
-            iconImageOffset: [-5, -38] // Смещение для начального изображения
+            iconImageOffset: [-5, -38] // Г‘Г¬ГҐГ№ГҐГ­ГЁГҐ Г¤Г«Гї Г­Г Г·Г Г«ГјГ­Г®ГЈГ® ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГї
         });
 
         myMap.geoObjects.add(myPlacemark);
@@ -47,22 +47,22 @@ function init() {
         myPlacemark.events
             .add('mouseenter', function (e) {
                 e.get('target').options.set('iconLayout', 'default#imageWithContent');
-                e.get('target').options.set('iconImageSize', [240, 144]); // Установите размеры для изображения
-                e.get('target').options.set('iconImageOffset', [-images[data.imageKey].width, -images[data.imageKey].height]); // Смещение для фиксации левого нижнего угла
+                e.get('target').options.set('iconImageSize', [240, 144]); // Г“Г±ГІГ Г­Г®ГўГЁГІГҐ Г°Г Г§Г¬ГҐГ°Г» Г¤Г«Гї ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГї
+                e.get('target').options.set('iconImageOffset', [-images[data.imageKey].width, -images[data.imageKey].height]); // Г‘Г¬ГҐГ№ГҐГ­ГЁГҐ Г¤Г«Гї ГґГЁГЄГ±Г Г¶ГЁГЁ Г«ГҐГўГ®ГЈГ® Г­ГЁГ¦Г­ГҐГЈГ® ГіГЈГ«Г 
                 e.get('target').options.set('iconContentOffset', [20, 15]);
-                e.get('target').options.set('iconImageHref', images[data.imageKey].src); // Меняем на индивидуальное изображение
+                e.get('target').options.set('iconImageHref', images[data.imageKey].src); // ГЊГҐГ­ГїГҐГ¬ Г­Г  ГЁГ­Г¤ГЁГўГЁГ¤ГіГ Г«ГјГ­Г®ГҐ ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГҐ
             })
             .add('mouseleave', function (e) {
                 e.get('target').options.set('iconLayout', 'default#imageWithContent');
                 e.get('target').options.set('iconImageSize', [30, 50]);
                 e.get('target').options.set('iconImageOffset', [-5, -38]);
-                e.get('target').options.set('iconImageHref', 'images.png'); // Возвращаем общее изображение
+                e.get('target').options.set('iconImageHref', 'images.png'); // Г‚Г®Г§ГўГ°Г Г№Г ГҐГ¬ Г®ГЎГ№ГҐГҐ ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГҐ
             })
             .add('click', function (e) {
-                // Открываем балун с изображением
-                e.get('target').balloon.open(data.coordinates, {
+                // ГЋГІГЄГ°Г»ГўГ ГҐГ¬ ГЎГ Г«ГіГ­ Г± ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГҐГ¬
+                e.get('target').data.imageKey.open(data.coordinates, {
                     contentBody: '<img src="' + images[data.imageKey].src + '" width="' + images[data.imageKey].width + '" height="' + images[data.imageKey].height + '" alt="Image"/>',
-                    closeButton: true // Кнопка закрытия балуна
+                    closeButton: true // ГЉГ­Г®ГЇГЄГ  Г§Г ГЄГ°Г»ГІГЁГї ГЎГ Г«ГіГ­Г 
                 });
             });
     });
