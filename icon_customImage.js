@@ -45,7 +45,7 @@ function init() {
         })
         .add('click', function (e) {
             // Открываем балун с изображением sergey.png
-            e.get('target').balloon.open(placemarkCoordinates, {
+            e.get('target').sergey.png.open(placemarkCoordinates, {
                 contentBody: '<img src="sergey.png" width="' + sergeyImageWidth + '" height="' + sergeyImageHeight + '" alt="Sergey Image"/>',
                 // Вы можете добавить дополнительные параметры для настройки балуна
                 closeButton: true // Кнопка закрытия балуна
