@@ -10,9 +10,9 @@ function init() {
 
     const MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #000000; font-weight: bold;">$[properties.iconContent]</div>');
 
-    // Çàäàéòå ðàçìåðû âàøèõ èçîáðàæåíèé
+    // Изображения для меток
     const images = {
-        images: { src: 'images.png', width: 100, height: 100 }, // Îáùåå èçîáðàæåíèå äëÿ âñåõ ìåòîê
+        images: { src: 'images.png', width: 100, height: 100 },
         sergey: { src: 'sergey.png', width: 100, height: 100 },
         degt: { src: 'degt.png', width: 100, height: 100 },
         passion: { src: 'passion.png', width: 100, height: 100 },
@@ -20,7 +20,7 @@ function init() {
         prech: { src: 'prech.png', width: 100, height: 100 }
     };
 
-    // Êîîðäèíàòû äëÿ êàæäîãî îáúåêòà
+    // Данные меток
     const placemarksData = [
         { coordinates: [55.768339, 37.629125], imageKey: 'sergey' },
         { coordinates: [55.768532, 37.604978], imageKey: 'degt' },
@@ -39,7 +39,7 @@ function init() {
             iconLayout: 'default#imageWithContent',
             iconImageHref: 'images.png',
             iconImageSize: [30, 50],
-            iconImageOffset: [-5, -38] // Ñìåùåíèå äëÿ íà÷àëüíîãî èçîáðàæåíèÿ
+            iconImageOffset: [-5, -38]
         });
 
         myMap.geoObjects.add(myPlacemark);
@@ -47,26 +47,44 @@ function init() {
         myPlacemark.events
             .add('mouseenter', function (e) {
                 e.get('target').options.set('iconLayout', 'default#imageWithContent');
-                e.get('target').options.set('iconImageSize', [240, 144]); // Óñòàíîâèòå ðàçìåðû äëÿ èçîáðàæåíèÿ
-                e.get('target').options.set('iconImageOffset', [-images[data.imageKey].width, -images[data.imageKey].height]); // Ñìåùåíèå äëÿ ôèêñàöèè ëåâîãî íèæíåãî óãëà
+                e.get('target').options.set('iconImageSize', [240, 144]);
+                e.get('target').options.set('iconImageOffset', [-images[data.imageKey].width, -images[data.imageKey].height]);
                 e.get('target').options.set('iconContentOffset', [20, 15]);
-                e.get('target').options.set('iconImageHref', images[data.imageKey].src); // Ìåíÿåì íà èíäèâèäóàëüíîå èçîáðàæåíèå
+                e.get('target').options.set('iconImageHref', images[data.imageKey].src);
             })
             .add('mouseleave', function (e) {
                 e.get('target').options.set('iconLayout', 'default#imageWithContent');
                 e.get('target').options.set('iconImageSize', [30, 50]);
                 e.get('target').options.set('iconImageOffset', [-5, -38]);
-                e.get('target').options.set('iconImageHref', 'images.png'); // Âîçâðàùàåì îáùåå èçîáðàæåíèå
+                e.get('target').options.set('iconImageHref', 'images.png');
             })
             .add('click', function (e) {
-                // Îòêðûâàåì áàëóí ñ èçîáðàæåíèåì
-                e.get('target').data.imageKey.open(data.coordinates, {
-                    contentBody: '<img src="' + images[data.imageKey].src + '" width="' + images[data.imageKey].width + '" height="' + images[data.imageKey].height + '" alt="Image"/>',
-                    closeButton: true // Êíîïêà çàêðûòèÿ áàëóíà
-                });
+                // Создаем модальное окно для изображения
+                const img = document.createElement('img');
+                img.src = images[data.imageKey].src;
+                img.style.width = '300px'; // Задайте нужные размеры
+                img.style.height = 'auto';
+
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                modal.style.display = 'flex';
+                modal.style.alignItems = 'center';
+                modal.style.justifyContent = 'center';
+                modal.onclick = () => {
+                    document.body.removeChild(modal);
+                };
+
+                modal.appendChild(img);
+                document.body.appendChild(modal);
             });
     });
 }
+
 
 
 
