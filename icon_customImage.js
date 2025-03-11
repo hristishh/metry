@@ -10,7 +10,7 @@ function init() {
 
     const MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #000000; font-weight: bold;">$[properties.iconContent]</div>');
 
-    // Изображения для меток
+    // РР·РѕР±СЂР°Р¶РµРЅРёСЏ РґР»СЏ РјРµС‚РѕРє
     const images = {
         images: { src: 'images.png', width: 100, height: 100 },
         sergey: { src: 'sergey.png', width: 100, height: 100 },
@@ -21,7 +21,7 @@ function init() {
         mir: { src: 'mir.png', width: 100, height: 100 }
     };
 
-    // Данные меток
+    // Р”Р°РЅРЅС‹Рµ РјРµС‚РѕРє
     const placemarksData = [
         { coordinates: [55.768339, 37.629125], imageKey: 'sergey' },
         { coordinates: [55.768532, 37.604978], imageKey: 'degt' },
@@ -31,14 +31,14 @@ function init() {
         { coordinates: [55.781793, 37.634290], imageKey: 'mir' }
     ];
 
-     // Данные меток достопримечательностей
+     // Р”Р°РЅРЅС‹Рµ РјРµС‚РѕРє РґРѕСЃС‚РѕРїСЂРёРјРµС‡Р°С‚РµР»СЊРЅРѕСЃС‚РµР№
     const attractionsData = [
-        { coordinates: [55.747224, 37.605240], title: 'Museum', imageSrc: 'museum.png' },
-        { coordinates: [55.753544, 37.621202], title: 'Red Square', imageSrc: 'square.png' },
-        { coordinates: [55.760135, 37.624957], title: 'Central Children_s Store', imageSrc: 'cdm.png' },
-        { coordinates: [55.760056, 37.618672], title: 'Bolshoi Theatre', imageSrc: 'theatre.png' },
-        { coordinates: [55.731474, 37.603431], title: 'Gorky Park', imageSrc: 'park.png' },
-        { coordinates: [55.741556, 37.620028], title: 'Gallery', imageSrc: 'gallery.png' }
+        { coordinates: [55.747224, 37.605240],  imageSrc: 'museum.png' },
+        { coordinates: [55.753544, 37.621202],  imageSrc: 'square.png' },
+        { coordinates: [55.760135, 37.624957],  imageSrc: 'cdm.png' },
+        { coordinates: [55.760056, 37.618672],  imageSrc: 'theatre.png' },
+        { coordinates: [55.731474, 37.603431],  imageSrc: 'park.png' },
+        { coordinates: [55.741556, 37.620028],  imageSrc: 'gallery.png' }
     ];
 
     placemarksData.forEach(data => {
@@ -70,11 +70,20 @@ function init() {
                 e.get('target').options.set('iconImageOffset', [-5, -38]);
                 e.get('target').options.set('iconImageHref', 'images.png');
             })
-            .add('click', function (e) {
-                // Создаем модальное окно для изображения
+              .add('click', function (e) {
+                        const modalImageSrc = {
+                            sergey: 'fullsergey.png',
+                            degt: 'fulldegt.png',
+                            passion: 'fullpassion.png',
+                            passion2: 'fullpassion2.png',
+                            prech: 'fullprech.png',
+                            mir: 'fullmir.png'
+                        }[data.imageKey];
+ 
+                // РЎРѕР·РґР°РµРј РјРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
                 const img = document.createElement('img');
-                img.src = images[data.imageKey].src;
-                img.style.width = '300px'; // Задайте нужные размеры
+                img.src = modalImageSrc;
+                img.style.width = '300px'; // Р—Р°РґР°Р№С‚Рµ РЅСѓР¶РЅС‹Рµ СЂР°Р·РјРµСЂС‹
                 img.style.height = 'auto';
 
                 const modal = document.createElement('div');
@@ -95,7 +104,7 @@ function init() {
                 document.body.appendChild(modal);
             });
     });
-    // Добавление меток достопримечательностей с индивидуальными изображениями
+    // Р”РѕР±Р°РІР»РµРЅРёРµ РјРµС‚РѕРє РґРѕСЃС‚РѕРїСЂРёРјРµС‡Р°С‚РµР»СЊРЅРѕСЃС‚РµР№ СЃ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹РјРё РёР·РѕР±СЂР°Р¶РµРЅРёСЏРјРё
     attractionsData.forEach(attraction => {
         const attractionPlacemark = new ymaps.Placemark(attraction.coordinates, {
             hintContent: attraction.title,
@@ -104,7 +113,7 @@ function init() {
             iconLayout: 'default#image',
             iconImageHref: attraction.imageSrc,
             iconImageSize: [100, 55],
-            iconImageOffset: [-15, -30] // Центрирование по нижнему центру
+            iconImageOffset: [-15, -30] // Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ РїРѕ РЅРёР¶РЅРµРјСѓ С†РµРЅС‚СЂСѓ
         });
 
         myMap.geoObjects.add(attractionPlacemark);
