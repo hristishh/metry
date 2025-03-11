@@ -10,7 +10,7 @@ function init() {
 
     const MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #000000; font-weight: bold;">$[properties.iconContent]</div>');
 
-    // РР·РѕР±СЂР°Р¶РµРЅРёСЏ РґР»СЏ РјРµС‚РѕРє
+    // Изображения для меток
     const images = {
         images: { src: 'images.png', width: 100, height: 100 },
         sergey: { src: 'sergey.png', width: 100, height: 100 },
@@ -21,7 +21,7 @@ function init() {
         mir: { src: 'mir.png', width: 100, height: 100 }
     };
 
-    // Р”Р°РЅРЅС‹Рµ РјРµС‚РѕРє
+    // Данные меток
     const placemarksData = [
         { coordinates: [55.768339, 37.629125], imageKey: 'sergey' },
         { coordinates: [55.768532, 37.604978], imageKey: 'degt' },
@@ -31,7 +31,7 @@ function init() {
         { coordinates: [55.781793, 37.634290], imageKey: 'mir' }
     ];
 
-     // Р”Р°РЅРЅС‹Рµ РјРµС‚РѕРє РґРѕСЃС‚РѕРїСЂРёРјРµС‡Р°С‚РµР»СЊРЅРѕСЃС‚РµР№
+     // Данные меток достопримечательностей
     const attractionsData = [
         { coordinates: [55.747224, 37.605240],  imageSrc: 'museum.png' },
         { coordinates: [55.753544, 37.621202],  imageSrc: 'square.png' },
@@ -80,10 +80,10 @@ function init() {
                             mir: 'fullmir.png'
                         }[data.imageKey];
  
-                // РЎРѕР·РґР°РµРј РјРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
+                // Создаем модальное окно для изображения
                 const img = document.createElement('img');
                 img.src = modalImageSrc;
-                img.style.width = '300px'; // Р—Р°РґР°Р№С‚Рµ РЅСѓР¶РЅС‹Рµ СЂР°Р·РјРµСЂС‹
+                img.style.width = '300px'; // Задайте нужные размеры
                 img.style.height = 'auto';
 
                 const modal = document.createElement('div');
@@ -104,7 +104,7 @@ function init() {
                 document.body.appendChild(modal);
             });
     });
-    // Р”РѕР±Р°РІР»РµРЅРёРµ РјРµС‚РѕРє РґРѕСЃС‚РѕРїСЂРёРјРµС‡Р°С‚РµР»СЊРЅРѕСЃС‚РµР№ СЃ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹РјРё РёР·РѕР±СЂР°Р¶РµРЅРёСЏРјРё
+    // Добавление меток достопримечательностей с индивидуальными изображениями
     attractionsData.forEach(attraction => {
         const attractionPlacemark = new ymaps.Placemark(attraction.coordinates, {
             hintContent: attraction.title,
@@ -113,7 +113,7 @@ function init() {
             iconLayout: 'default#image',
             iconImageHref: attraction.imageSrc,
             iconImageSize: [100, 55],
-            iconImageOffset: [-15, -30] // Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ РїРѕ РЅРёР¶РЅРµРјСѓ С†РµРЅС‚СЂСѓ
+            iconImageOffset: [-15, -30] // Центрирование по нижнему центру
         });
 
         myMap.geoObjects.add(attractionPlacemark);
