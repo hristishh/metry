@@ -10,35 +10,45 @@ function init() {
 
     const MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #000000; font-weight: bold;">$[properties.iconContent]</div>');
 
-    // Изображения для меток
+    // РР·РѕР±СЂР°Р¶РµРЅРёСЏ РґР»СЏ РјРµС‚РѕРє
     const images = {
         images: { src: 'images.png', width: 100, height: 100 },
         sergey: { src: 'sergey.png', width: 100, height: 100 },
         degt: { src: 'degt.png', width: 100, height: 100 },
-        passion: { src: 'passion.png', width: 100, height: 100 },
-        passion2: { src: 'passion2.png', width: 100, height: 100 },
+        str4: { src: 'str4.png', width: 100, height: 100 },
+        str12: { src: 'str12.png', width: 100, height: 100 },
         prech: { src: 'prech.png', width: 100, height: 100 },
-        mir: { src: 'mir.png', width: 100, height: 100 }
+        mir: { src: 'mir.png', width: 100, height: 100 },
+        tver: { src: 'tver.png', width: 100, height: 100 },
+        devyat: { src: 'devyat.png', width: 100, height: 100 },
+        petr: { src: 'petr.png', width: 100, height: 100 },
+        str5: { src: 'str5.png', width: 100, height: 100 }
     };
 
-    // Данные меток
+    // Р”Р°РЅРЅС‹Рµ РјРµС‚РѕРє
     const placemarksData = [
         { coordinates: [55.768339, 37.629125], imageKey: 'sergey' },
         { coordinates: [55.768532, 37.604978], imageKey: 'degt' },
-        { coordinates: [55.764987, 37.608212], imageKey: 'passion' },
-        { coordinates: [55.767053, 37.611859], imageKey: 'passion2' },
+        { coordinates: [55.764987, 37.608212], imageKey: 'str4' },
+        { coordinates: [55.767053, 37.611859], imageKey: 'str12' },
         { coordinates: [55.744064, 37.590856], imageKey: 'prech' },
-        { coordinates: [55.781793, 37.634290], imageKey: 'mir' }
+        { coordinates: [55.781793, 37.634290], imageKey: 'mir' },
+        { coordinates: [55.768659, 37.597558], imageKey: 'tver' },
+        { coordinates: [55.759375, 37.638575], imageKey: 'devyat' },
+        { coordinates: [55.764323, 37.615416], imageKey: 'petr' },
+        { coordinates: [55.764739, 37.608805], imageKey: 'str5' },
     ];
 
-     // Данные меток достопримечательностей
+     // Р”Р°РЅРЅС‹Рµ РјРµС‚РѕРє РґРѕСЃС‚РѕРїСЂРёРјРµС‡Р°С‚РµР»СЊРЅРѕСЃС‚РµР№
     const attractionsData = [
         { coordinates: [55.747224, 37.605240],  imageSrc: 'museum.png' },
         { coordinates: [55.753544, 37.621202],  imageSrc: 'square.png' },
         { coordinates: [55.760135, 37.624957],  imageSrc: 'cdm.png' },
         { coordinates: [55.760056, 37.618672],  imageSrc: 'theatre.png' },
         { coordinates: [55.731474, 37.603431],  imageSrc: 'park.png' },
-        { coordinates: [55.741556, 37.620028],  imageSrc: 'gallery.png' }
+        { coordinates: [55.741556, 37.620028],  imageSrc: 'gallery.png' },
+        { coordinates: [55.744661, 37.605526],  imageSrc: 'hram.png' },
+        { coordinates: [55.764944, 37.591722],  imageSrc: 'patriki.png' }
     ];
 
     placemarksData.forEach(data => {
@@ -74,16 +84,20 @@ function init() {
                         const modalImageSrc = {
                             sergey: 'fullsergey.png',
                             degt: 'fulldegt.png',
-                            passion: 'fullpassion.png',
-                            passion2: 'fullpassion2.png',
+                            str4: 'fullpassion.png',
+                            str12: 'fullpassion2.png',
                             prech: 'fullprech.png',
-                            mir: 'fullmir.png'
+                            mir: 'fullmir.png',
+                            tver: 'fulltver.png',
+                            devyat: 'fulldevyat.png',
+                            petr: 'fullpetr.png',
+                            str5: 'fullstr5.png',
                         }[data.imageKey];
  
-                // Создаем модальное окно для изображения
+                // РЎРѕР·РґР°РµРј РјРѕРґР°Р»СЊРЅРѕРµ РѕРєРЅРѕ РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
                 const img = document.createElement('img');
                 img.src = modalImageSrc;
-                img.style.width = '300px'; // Задайте нужные размеры
+                img.style.width = '300px'; // Р—Р°РґР°Р№С‚Рµ РЅСѓР¶РЅС‹Рµ СЂР°Р·РјРµСЂС‹
                 img.style.height = 'auto';
 
                 const modal = document.createElement('div');
@@ -104,7 +118,7 @@ function init() {
                 document.body.appendChild(modal);
             });
     });
-    // Добавление меток достопримечательностей с индивидуальными изображениями
+    // Р”РѕР±Р°РІР»РµРЅРёРµ РјРµС‚РѕРє РґРѕСЃС‚РѕРїСЂРёРјРµС‡Р°С‚РµР»СЊРЅРѕСЃС‚РµР№ СЃ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹РјРё РёР·РѕР±СЂР°Р¶РµРЅРёСЏРјРё
     attractionsData.forEach(attraction => {
         const attractionPlacemark = new ymaps.Placemark(attraction.coordinates, {
             hintContent: attraction.title,
@@ -112,14 +126,13 @@ function init() {
         }, {
             iconLayout: 'default#image',
             iconImageHref: attraction.imageSrc,
-            iconImageSize: [100, 55],
-            iconImageOffset: [-15, -30] // Центрирование по нижнему центру
+            iconImageSize: [70, 80],
+            iconImageOffset: [-15, -30] // Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ РїРѕ РЅРёР¶РЅРµРјСѓ С†РµРЅС‚СЂСѓ
         });
 
         myMap.geoObjects.add(attractionPlacemark);
     });
 }
-
 
 
 
