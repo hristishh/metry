@@ -10,7 +10,7 @@ function init() {
 
     const MyIconContentLayout = ymaps.templateLayoutFactory.createClass('<div style="color: #000000; font-weight: bold;">$[properties.iconContent]</div>');
 
-    // Г€Г§Г®ГЎГ°Г Г¦ГҐГ­ГЁГї Г¤Г«Гї Г¬ГҐГІГ®ГЄ
+    // Изображения для меток
     const images = {
         images: { src: 'images.png', width: 100, height: 100 },
         sergey: { src: 'sergey.png', width: 100, height: 100 },
@@ -22,10 +22,11 @@ function init() {
         tver: { src: 'tver.png', width: 100, height: 100 },
         devyat: { src: 'devyat.png', width: 100, height: 100 },
         petr: { src: 'petr.png', width: 100, height: 100 },
-        str5: { src: 'str5.png', width: 100, height: 100 }
+        str5: { src: 'str5.png', width: 100, height: 100 },
+        timur: { src: 'timur.png', width: 100, height: 100 }
     };
 
-    // Г„Г Г­Г­Г»ГҐ Г¬ГҐГІГ®ГЄ
+    // Данные меток
     const placemarksData = [
         { coordinates: [55.768339, 37.629125], imageKey: 'sergey' },
         { coordinates: [55.768532, 37.604978], imageKey: 'degt' },
@@ -37,9 +38,10 @@ function init() {
         { coordinates: [55.759375, 37.638575], imageKey: 'devyat' },
         { coordinates: [55.764323, 37.615416], imageKey: 'petr' },
         { coordinates: [55.764739, 37.608805], imageKey: 'str5' },
+        { coordinates: [55.733609, 37.591692], imageKey: 'timur' }
     ];
 
-     // Г„Г Г­Г­Г»ГҐ Г¬ГҐГІГ®ГЄ Г¤Г®Г±ГІГ®ГЇГ°ГЁГ¬ГҐГ·Г ГІГҐГ«ГјГ­Г®Г±ГІГҐГ©
+     // Данные меток достопримечательностей
     const attractionsData = [
         { coordinates: [55.747224, 37.605240],  imageSrc: 'museum.png' },
         { coordinates: [55.753544, 37.621202],  imageSrc: 'square.png' },
@@ -84,20 +86,21 @@ function init() {
                         const modalImageSrc = {
                             sergey: 'fullsergey.png',
                             degt: 'fulldegt.png',
-                            str4: 'fullstr4.png',
-                            str12: 'fullstr12.png',
+                            str4: 'fullpassion.png',
+                            str12: 'fullpassion2.png',
                             prech: 'fullprech.png',
                             mir: 'fullmir.png',
                             tver: 'fulltver.png',
                             devyat: 'fulldevyat.png',
                             petr: 'fullpetr.png',
                             str5: 'fullstr5.png',
+                            timur: 'fulltimur.png'
                         }[data.imageKey];
  
-                // Г‘Г®Г§Г¤Г ГҐГ¬ Г¬Г®Г¤Г Г«ГјГ­Г®ГҐ Г®ГЄГ­Г® Г¤Г«Гї ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГї
+                // Создаем модальное окно для изображения
                 const img = document.createElement('img');
                 img.src = modalImageSrc;
-                img.style.width = '300px'; // Г‡Г Г¤Г Г©ГІГҐ Г­ГіГ¦Г­Г»ГҐ Г°Г Г§Г¬ГҐГ°Г»
+                img.style.width = '300px'; // Задайте нужные размеры
                 img.style.height = 'auto';
 
                 const modal = document.createElement('div');
@@ -118,7 +121,7 @@ function init() {
                 document.body.appendChild(modal);
             });
     });
-    // Г„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ Г¬ГҐГІГ®ГЄ Г¤Г®Г±ГІГ®ГЇГ°ГЁГ¬ГҐГ·Г ГІГҐГ«ГјГ­Г®Г±ГІГҐГ© Г± ГЁГ­Г¤ГЁГўГЁГ¤ГіГ Г«ГјГ­Г»Г¬ГЁ ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГїГ¬ГЁ
+    // Добавление меток достопримечательностей с индивидуальными изображениями
     attractionsData.forEach(attraction => {
         const attractionPlacemark = new ymaps.Placemark(attraction.coordinates, {
             hintContent: attraction.title,
@@ -127,7 +130,7 @@ function init() {
             iconLayout: 'default#image',
             iconImageHref: attraction.imageSrc,
             iconImageSize: [70, 80],
-            iconImageOffset: [-15, -30] // Г–ГҐГ­ГІГ°ГЁГ°Г®ГўГ Г­ГЁГҐ ГЇГ® Г­ГЁГ¦Г­ГҐГ¬Гі Г¶ГҐГ­ГІГ°Гі
+            iconImageOffset: [-15, -30] // Центрирование по нижнему центру
         });
 
         myMap.geoObjects.add(attractionPlacemark);
